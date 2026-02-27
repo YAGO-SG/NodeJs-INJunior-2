@@ -1,8 +1,6 @@
-import { prisma } from "@/libs/prisma.js"
 import { z } from "zod"
 import type { FastifyRequest, FastifyReply } from "fastify"
-import { hash } from "bcryptjs"
-import { env } from "@/env/index.js"
+import { RegisterUserUseCase } from "@/use-case/users/register.js"
 
 
 
@@ -16,15 +14,11 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     const { name, email, password, photo} = registerBodySchema.parse(request.body)
 
-    const passwordHash = await hash(password, env.HASH_SALT_ROUNDS)
-
-    const user = await prisma.user.create({
-        data: {
-            name,
-            email,
-            password: passwordHash,
-            photo
-        }
+    const { user } = await new RegisterUserUseCase().execute({
+        name,
+        email,
+        password,
+        photo
     })
 
     return reply.status(201).send(user)
