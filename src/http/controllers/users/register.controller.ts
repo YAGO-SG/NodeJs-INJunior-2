@@ -1,6 +1,6 @@
 import { z } from "zod"
 import type { FastifyRequest, FastifyReply } from "fastify"
-import { makeRegisterUseCase } from "@/use-case/factories/make-register-usecase.js"
+import { makeRegisterUseCase } from "@/use-case/factories/user/make-register-usecase.js"
 import { UserPresenter } from "@/http/presenters/user-presenter.js"
 
 
