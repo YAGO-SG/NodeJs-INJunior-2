@@ -1,6 +1,7 @@
 import { z } from "zod"
 import type { FastifyRequest, FastifyReply } from "fastify"
 import { makeRegisterUseCase } from "@/use-case/factories/make-register-usecase.js"
+import { UserPresenter } from "@/http/presenters/user-presenter.js"
 
 
 
@@ -23,5 +24,5 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
         photo
     })
 
-    return reply.status(201).send(user)
+    return reply.status(201).send(UserPresenter.toHTTP(user))
 }
