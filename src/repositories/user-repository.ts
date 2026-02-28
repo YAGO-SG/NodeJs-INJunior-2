@@ -5,4 +5,5 @@ export interface UsersRepository {
     create(data: Prisma.UserCreateInput ): Promise<User>
     list(): Promise<User[]>
     listOne(publicId: string): Promise<User | null>
+    delete(id: number): Promise<void>
 }

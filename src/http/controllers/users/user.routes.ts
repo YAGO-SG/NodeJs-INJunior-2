@@ -8,7 +8,7 @@ import { listOneUser } from "./list-one-user.controller.js";
 export async function usersRoutes(app: FastifyInstance) {
     app.post('/', register);
     app.get('/list', listUsers);
-    app.delete('/delete/:id', deleteUser);
-    app.patch('/update/:id', patchUser);
+    app.delete('/delete/:publicId', deleteUser);
+    app.patch('/update/:publicId', patchUser);
     app.get('/user/:publicId', listOneUser);
 }
