@@ -10,5 +10,5 @@ export async function usersRoutes(app: FastifyInstance) {
     app.get('/list', listUsers);
     app.delete('/delete/:id', deleteUser);
     app.patch('/update/:id', patchUser);
-    app.get('/user/:id', listOneUser);
+    app.get('/user/:publicId', listOneUser);
 }

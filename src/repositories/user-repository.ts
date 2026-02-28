@@ -3,6 +3,6 @@ import type { Prisma, User } from "@/@types/prisma/client.js";
 
 export interface UsersRepository {
     create(data: Prisma.UserCreateInput ): Promise<User>
-
     list(): Promise<User[]>
+    listOne(publicId: string): Promise<User | null>
 }
