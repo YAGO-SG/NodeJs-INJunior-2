@@ -1,7 +1,8 @@
 import type { User } from "@/@types/prisma/client.js"
 import { env } from "@/env/index.js"
-import { prisma } from "@/libs/prisma.js"
 import { hash } from "bcryptjs"
+import type { UsersRepository } from "@/repositories/user-repository.js"
+
 
 interface RegisterUserUseCaseRequest {
     name: string,
@@ -14,7 +15,10 @@ type RegisterUserUseCaseResponse = {
     user: User // o User é uma importação do meu modelo feito dentro do schema.prisma
 }
 
+
 export class RegisterUserUseCase {
+    constructor ( private UsersRepository: UsersRepository) {}
+
     async execute({ // uma função, quando dentro de uma classe nos chamamos de método. O nome 'execute' é uma convensão 
         name,
         email,
@@ -25,13 +29,11 @@ export class RegisterUserUseCase {
 
             const passwordHash = await hash(password, env.HASH_SALT_ROUNDS)
 
-            const user = await prisma.user.create({
-                data: {
-                    name,
-                    email,
-                    password: passwordHash,
-                    photo
-                }
+            const user = await this.UsersRepository.create({
+                name,
+                email,
+                password: passwordHash,
+                photo
             })
 
             return { user }
