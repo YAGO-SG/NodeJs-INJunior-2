@@ -12,5 +12,5 @@ export async function postRoutes(app: FastifyInstance) {
     app.get('/listUserPost/:authorId', userPosts)
     app.delete('/delete/:id', deletePost);
     app.patch('/update/:id', patchPost)
-    app.get('/list/:id', listOnePost)
+    app.get('/list/:publicId', listOnePost)
 }

@@ -23,7 +23,7 @@ export class getPostUseCase {
         const post = await this.PostsRepository.findBy({ publicId });
 
         if (!post) {
-            throw new Error("usuário não encontrado")
+            throw new Error("post não encontrado")
         }
         
         return { post }  
