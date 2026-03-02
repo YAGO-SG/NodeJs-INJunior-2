@@ -8,4 +8,16 @@ export class PrismaPostRepository implements PostsRepository { // implements for
     async create(data: Prisma.PostUncheckedCreateInput) {
         return await prisma.post.create({ data })
     }
+
+    async findBy(where: Prisma.PostWhereInput) {
+        return prisma.post.findFirst({
+            where
+        })
+    }
+
+    async delete( id: number) {
+        await prisma.post.delete({
+            where: { id }
+        })
+    }
 }

@@ -1,16 +1,21 @@
-import { prisma } from "@/libs/prisma.js";
+import { PostPresenter } from "@/http/presenters/post-presenter.js";
+import { makeGetUseCase } from "@/use-case/factories/post/make-get-usecase.js";
 import type { FastifyRequest, FastifyReply } from "fastify";
+import { z } from 'zod'
 
 
 export async function listOnePost( req: FastifyRequest, rep: FastifyReply) {
     
-    const { id } = req.params;
-    
-    const post = await prisma.post.findUnique({
-        where: {
-            id: parseInt(id),
-        }
+    const getParamsSchema = z.object({
+        publicId: z.string()
     })
 
-    return rep.status(200).send(post)
+    const { publicId } = getParamsSchema.parse(req.params)
+
+    const getPostUseCase = makeGetUseCase()
+    const { post } = await getPostUseCase.execute({
+        publicId
+    })
+
+    return rep.status(200).send(PostPresenter.toHTTP(post))
 }
