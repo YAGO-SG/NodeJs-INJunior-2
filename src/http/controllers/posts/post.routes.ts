@@ -9,8 +9,8 @@ import { listOnePost } from "./list-one-post.controller.js";
 export async function postRoutes(app: FastifyInstance) {
     app.post('/:publicId', createPost);
     app.get('/list', listPosts);
-    app.get('/listUserPost/:authorId', userPosts)
-    app.delete('/delete/:id', deletePost);
-    app.patch('/update/:id', patchPost)
+    app.get('/listUserPost/:publicId', userPosts)
+    app.delete('/delete/:publicId', deletePost);
+    app.patch('/update/:publicId', patchPost)
     app.get('/list/:publicId', listOnePost)
 }

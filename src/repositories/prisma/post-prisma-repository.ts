@@ -24,4 +24,12 @@ export class PrismaPostRepository implements PostsRepository { // implements for
     async list() {
         return await prisma.post.findMany()
     }
+
+    async listUserPosts(id: number) {
+        return await prisma.post.findMany({
+            where: {
+                authorId: id
+            }
+        })
+    }
 }

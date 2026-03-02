@@ -6,4 +6,5 @@ export interface PostsRepository {
     findBy(where: Prisma.PostWhereInput): Promise<Post | null>
     delete(id: number): Promise<void>
     list(): Promise<Post[]>
+    listUserPosts(authorId: number): Promise<Post[]>
 }
