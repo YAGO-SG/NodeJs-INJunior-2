@@ -13,6 +13,9 @@ datasource db {
   provider = "postgresql"
 }
 
+
+
+
 model User {
   id  Int @id @default(autoincrement())
   publicId String @unique @map("public_id") @default(uuid())
@@ -20,9 +23,13 @@ model User {
   name  String @unique
   email String @unique
   password  String
-
   photo String
+
   post Post[]
+
+  coment Coment[]
+
+  like Like[]
 
   @@index([name])
   @@map("users")
@@ -40,6 +47,43 @@ model Post {
   author  User @relation(fields: [authorId], references: [id])
   authorId  Int
 
+  coment Coment[]
+
+  like Like[]
+
   @@index([title])
   @@map("posts")
+}
+
+model Coment {
+  id  Int @id @default(autoincrement())
+  publicId String @unique @map("public_id") @default(uuid())
+
+  content String
+
+  created_at  DateTime @default(now()) @map("created_at")
+
+  author  User @relation(fields: [authorId], references: [id])
+  authorId  Int
+
+  post  Post @relation(fields: [postId], references: [id])
+  postId  Int
+
+  like Like[]
+}
+
+model Like {
+  id  Int @id @default(autoincrement())
+  publicId String @unique @map("public_id") @default(uuid())
+
+  created_at  DateTime @default(now()) @map("created_at")
+
+  author  User @relation(fields: [authorId], references: [id])
+  authorId  Int
+
+  post  Post @relation(fields: [postId], references: [id])
+  postId  Int
+
+  coment  Coment @relation(fields: [comentId], references: [id])
+  comentId  Int
 }
