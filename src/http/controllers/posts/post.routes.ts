@@ -7,7 +7,7 @@ import { patchPost } from "./patch-post.controller.js";
 import { listOnePost } from "./list-one-post.controller.js";
 
 export async function postRoutes(app: FastifyInstance) {
-    app.post('/', createPost);
+    app.post('/:publicId', createPost);
     app.get('/list', listPosts);
     app.get('/listUserPost/:authorId', userPosts)
     app.delete('/delete/:id', deletePost);

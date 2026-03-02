@@ -1,24 +1,30 @@
 import { z } from 'zod'
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { prisma } from '@/libs/prisma.js'
+import { makeCreateUseCase } from '@/use-case/factories/post/make-create-usecase.js'
+import { PostPresenter } from '@/http/presenters/post-presenter.js'
 
 export async function createPost(req: FastifyRequest, res: FastifyReply) {
-    const inputValidation = z.object({
-        title: z.string().trim().min(1).max(100),
-        content: z.string().min(1).max(250),
-        authorId: z.number()
+
+    const PostParamsSchema = z.object({
+        publicId: z.string()
     })
 
-    const { title, content, authorId } = inputValidation.parse(req.body)
+    const { publicId } = PostParamsSchema.parse(req.params)
 
-    const post = await prisma.post.create({
-        data: {
-            title,
-            content,
-            authorId
-        },
-    });
+    const PostBodySchema = z.object({
+        title: z.string(),
+        content: z.string()
+    })
 
-    return res.status(201).send(post)
+    const { title, content} = PostBodySchema.parse(req.body);
+
+    const createPostUseCase = makeCreateUseCase()
+    const { post } = await createPostUseCase.execute({
+        publicId,
+        title,
+        content,
+    })
+
+    return res.status(201).send(PostPresenter.toHTTP(post))
 }
 
