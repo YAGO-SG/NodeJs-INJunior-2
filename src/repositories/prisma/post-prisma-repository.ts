@@ -20,4 +20,8 @@ export class PrismaPostRepository implements PostsRepository { // implements for
             where: { id }
         })
     }
+
+    async list() {
+        return await prisma.post.findMany()
+    }
 }
