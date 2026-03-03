@@ -12,4 +12,10 @@ export class PrismaComentRepository implements ComentRepository {
     async list(){
         return await prisma.coment.findMany();
     }
+
+    async get(publicId: string) {
+        return await prisma.coment.findUnique({
+            where: { publicId }
+        })
+    }
 }
