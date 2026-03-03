@@ -1,5 +1,5 @@
 import { PrismaPostRepository } from "@/repositories/prisma/post-prisma-repository.js";
-import { getPostUseCase } from "@/use-case/post/get-post.js";
+import { getPostUseCase } from "@/use-case/services/post/get-post.js";
 
 export function makeGetUseCase() {
 

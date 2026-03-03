@@ -1,6 +1,6 @@
 import { PrismaPostRepository } from "@/repositories/prisma/post-prisma-repository.js";
 import { PrismaUsersRepository } from "@/repositories/prisma/user-prisma-repository.js";
-import { userPostsPostUseCase } from "@/use-case/post/user-post-list.js";
+import { userPostsPostUseCase } from "@/use-case/services/post/user-post-list.js";
 
 export function makeUsePostUseCase() {
 
