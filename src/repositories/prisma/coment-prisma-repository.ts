@@ -3,6 +3,9 @@ import type { ComentRepository } from "../coment-prisma.js";
 import { prisma } from "@/libs/prisma.js";
 
 
-export class PrismaPostRepository implements ComentRepository { 
+export class PrismaComentRepository implements ComentRepository { 
 
+    async create(data: Prisma.ComentUncheckedCreateInput) {
+        return await prisma.coment.create({ data })
+    }
 }
