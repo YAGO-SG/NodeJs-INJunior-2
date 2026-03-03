@@ -19,6 +19,20 @@ export class PrismaUsersRepository implements UsersRepository { // implements fo
             where: { publicId }
         })
     }
+
+    async findBy(where: Prisma.UserWhereInput) {
+        return await prisma.user.findFirst({
+            where
+        })
+    }
+
+    async findByEmailOrname(email: string, name: string) {
+        return await prisma.user.findFirst({
+            where: {
+                OR: [{ email }, { name }]
+            }
+        })
+    }
     
     async delete(id: number) {
         await prisma.user.delete({
