@@ -31,4 +31,12 @@ export class PrismaComentRepository implements ComentRepository {
             data
         })
     }
+
+    async listUsercoments(id: number) {
+        return await prisma.coment.findMany({
+            where: {
+                authorId: id
+            }
+        })
+    }
 }
