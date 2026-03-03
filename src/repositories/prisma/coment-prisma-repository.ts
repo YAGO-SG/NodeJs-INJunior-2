@@ -18,4 +18,10 @@ export class PrismaComentRepository implements ComentRepository {
             where: { publicId }
         })
     }
+
+    async delete(id: number){
+        await prisma.coment.delete({
+            where: { id }
+        })
+    }
 }

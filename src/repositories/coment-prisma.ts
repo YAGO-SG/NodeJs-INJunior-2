@@ -4,4 +4,5 @@ export interface ComentRepository {
         create(data: Prisma.ComentUncheckedCreateInput): Promise<Coment> 
         list(): Promise<Coment[]>
         get(publicId: string): Promise<Coment | null>
+        delete(id: number): Promise<void>
 }
