@@ -24,4 +24,11 @@ export class PrismaComentRepository implements ComentRepository {
             where: { id }
         })
     }
+
+    async update(id: number, data: Prisma.ComentUpdateInput) {
+        return await prisma.coment.update({
+            where: { id },
+            data
+        })
+    }
 }
