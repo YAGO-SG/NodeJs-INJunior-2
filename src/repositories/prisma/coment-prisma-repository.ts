@@ -8,4 +8,8 @@ export class PrismaComentRepository implements ComentRepository {
     async create(data: Prisma.ComentUncheckedCreateInput) {
         return await prisma.coment.create({ data })
     }
+
+    async list(){
+        return await prisma.coment.findMany();
+    }
 }
