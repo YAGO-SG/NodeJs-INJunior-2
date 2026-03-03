@@ -1,5 +1,5 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/user-prisma-repository.js";
-import { listUserUseCase } from "@/use-case/users/list-user.js";
+import { listUserUseCase } from "@/use-case/services/users/list-user.js";
 
 export function makelistUseCase() {
    
